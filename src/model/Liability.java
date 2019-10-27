@@ -2,22 +2,15 @@ package model;
 
 public class Liability extends Account{
 	
-	private String name;
 	private String temporaryValue;
 	
-
 	public final static String SHORTPERIOD = "Corto Plazo";
 	public final static String LONGPERIOD = "Largo Plazo";
 	
 	
-	public Liability(double value, String name,String temporaryValue) {
-		super(value);
-		this.name = name;
+	public Liability(String name,double value,String temporaryValue) {
+		super(name,value);
 		this.temporaryValue = temporaryValue;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public String getTemporaryValue() {

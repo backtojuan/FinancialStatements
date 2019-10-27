@@ -2,22 +2,16 @@ package model;
 
 public class Income extends Account{
 
-	private String name;
 	private String profitValue;
 	
-	private final static String OPERATIVE = "Operativo";
-	private final static String NONOPERATIVE = "No Operativo";
+	public final static String OPERATIVE = "Operativo";
+	public final static String NONOPERATIVE = "No Operativo";
 
-	public Income(double value, String name, String profitValue) {
-		super(value);
-		this.name = name;
+	public Income(String name,double value,String profitValue) {
+		super(name,value);
 		this.profitValue = profitValue;
 	}
-
-	public String getName() {
-		return name;
-	}
-
+	
 	public String getProfitValue() {
 		return profitValue;
 	}

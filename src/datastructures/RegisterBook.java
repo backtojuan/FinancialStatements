@@ -9,7 +9,6 @@ public class RegisterBook<Key, Value> implements HashInterface<Key,Value>{
 	private List<Value> nodes;
 	
 	private int tablesize; 
-	private int numNodes;
 	
 	public RegisterBook() {
 		tablesize = 10;
@@ -50,7 +49,6 @@ public class RegisterBook<Key, Value> implements HashInterface<Key,Value>{
 				found = true;
 				nodes.remove(index);
 				nodes.add(index, value);
-				numNodes++;
 			}
 						
 			if(counter==tablesize && !found) {
@@ -62,11 +60,6 @@ public class RegisterBook<Key, Value> implements HashInterface<Key,Value>{
 			}
 		}
 		
-	}
-
-	@Override
-	public int size() {
-		return numNodes;
 	}
 	
 	private int getIndex(Key key, int counter) {

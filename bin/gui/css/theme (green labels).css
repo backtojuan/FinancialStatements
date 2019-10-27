@@ -9,6 +9,17 @@
 	-fx-text-fill: forestgreen;
 	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
+.label2{
+		-fx-text-fill: black;
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+.combobox{
+	-fx-background-color: LIMEGREEN; -fx-text-fill: white;
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+.menuitem{
+	-fx-background-color: WHITE;
+}
 
 
 // formato para las celdas del tableview

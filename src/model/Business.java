@@ -3,20 +3,21 @@ import datastructures.RegisterBook;
 
 public class Business {
 
-	private RegisterBook<String,Account> registerbook;
+	private RegisterBook<String,Double> registerbook;
 	private String name;
-	private String address;
 	
-	public Business(String name, String address) {
+	
+	public Business(String name) {
 		this.name = name;
-		this.address = address;
-		this.registerbook = new RegisterBook<String,Account>();
+		this.registerbook = new RegisterBook<String,Double>();
 	}
 	
+	public void addAccount(Account account) {
+		registerbook.add(account.getName(), account.getValue());
+	}
+
 	public String getName() {
 		return name;
 	}
-	public String getAddress() {
-		return address;
-	}
+
 }

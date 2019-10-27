@@ -18,7 +18,6 @@ public class Main extends Application{
 			stage.setTitle("Financial Statements");
 			stage.setFullScreen(true);
 			stage.setScene(scene);
-			stage.setResizable(false);
 			
 			Image icon = new Image("gui/imgs/icon.png");
 			stage.getIcons().add(icon);

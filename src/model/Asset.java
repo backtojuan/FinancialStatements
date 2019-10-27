@@ -2,16 +2,15 @@ package model;
 
 public class Asset extends Account{
 	
-	private String name;
 	private String type;
 	private boolean isDepreciable;
 	
 	public static final String CURRENT = "Corriente";
 	public static final String NONCURRENT = "No Corriente";
 	
-	public Asset(double value, String type) {
+	public Asset(String name,double value, String type) {
 		
-		super(value);
+		super(name,value);
 		
 		this.type = type;
 		if (type.equals(CURRENT)){
@@ -20,10 +19,6 @@ public class Asset extends Account{
 		else {
 			isDepreciable = true;
 		}
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public String getType() {
