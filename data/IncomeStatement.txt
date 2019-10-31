@@ -1,0 +1,11 @@
+Universidad Icesi
+Income Statement 2019-10
+
+ Name: Sells Value: 1000.0
+Total Incomes1000.0
+
+ Name: Inventory  Value: 500.0
+Total Consumes500.0
+
+-------------------------------------------------------
+Total Utility: 500.0

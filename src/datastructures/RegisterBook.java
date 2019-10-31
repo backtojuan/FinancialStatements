@@ -6,71 +6,71 @@ import model.Account;
 
 public class RegisterBook<Key, Value> implements HashInterface<Key,Value>{
 	
-	private List<AccountRegister<Key,Value>> nodes;
+	private AccountRegister<Key,Value>[] nodes;
 	
 	private int tablesize; 
 	
-	public RegisterBook() {
-		tablesize = 10;
-		nodes = new ArrayList<>();
+	private int numnodes;
+	
+	private String date;
+	
+	@SuppressWarnings("unchecked")
+	public RegisterBook(String date) {
 		
-		for (int i = 0; i < tablesize; i++) {
-			nodes.add(null);
-		}
+		this.date = date;
+		
+		tablesize = 5;
+		
+		nodes = new AccountRegister[tablesize];
+	
 	}
-
+	
 	@Override
-	public Value getValue(Key key) {
+	public ArrayList<AccountRegister<Key,Value>> getValues(Key key) {
+	
+		ArrayList<AccountRegister<Key,Value>> values = new ArrayList<>();
 		
-		Value value = null;
-		boolean found = false;
+		int index = getIndex(key);
 		
-		for(int counter = 0; counter<tablesize;counter++) {
-			
-			int index = getIndex(key, counter);
+		AccountRegister<Key,Value> account = nodes[index];
 		
-			if(nodes.get(index)!= null && nodes.get(index).getKey().equals(key)) {
-				found = true;
-				value = nodes.get(index).getValue();
+		if(account!=null) {
+			values.add(account);
+			while(account.getNext()!=null) {
+				values.add(account.getNext());
+				account = account.getNext();
 			}
 		}
-			return value;
+		return values;
 	}
 
 	@Override
 	public void add(Key key,Value value) {
 		
-		System.out.println();
-		System.out.println("add in register book");
-		System.out.println(key);
-		System.out.println(value);
-		System.out.println();
+		int index = getIndex(key);
+		AccountRegister<Key,Value> account = nodes[index];
 		
-		boolean found = false;
-	
-		for(int counter=0; !found && counter<tablesize;counter++) {
-			int index = getIndex(key, counter);
-			
-			System.out.println(index);
-			
-			if(nodes.get(index)==null) {
-				found = true;
-				nodes.remove(index);
-				nodes.add(index, new AccountRegister<Key,Value>(key, value));
-			}
-						
-			if(counter==tablesize && !found) {
-				tablesize*=2;
-				
-				for (int i = counter; i < tablesize; i++) {
-					nodes.add(null);
-				}
-			}
+		if(account==null) {
+			nodes[index] = new AccountRegister<>(key, value);
+			numnodes++;
 		}
-		
+		else {
+			while(account.getNext()!=null) {
+				if(account.getKey().equals(key)) {
+					account.setNext(new AccountRegister<>(key,value));
+					numnodes++;
+				}
+				account = account.getNext();
+			}
+		}		
+	}
+
+	@Override
+	public int size() {
+		return numnodes;
 	}
 	
-	private int getIndex(Key key, int counter) {
+	public int getIndex(Key key) {
 		int index = 0;
 		
 		int hashCode = Math.abs(key.hashCode());
@@ -78,13 +78,7 @@ public class RegisterBook<Key, Value> implements HashInterface<Key,Value>{
 		double A = (Math.sqrt(5) - 1 )/ 2;
 		int h1 = (int) Math.floor(tablesize*(A*hashCode% 1));
 		
-		int h2 = hashCode % tablesize;
-		
-		index = (h1 + h2*counter)%tablesize;
-		
-		System.out.println();
-		System.out.println("index" + index);
-		System.out.println();
+		index = (h1 )%tablesize;
 		
 		return index;
 	}

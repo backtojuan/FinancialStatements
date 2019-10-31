@@ -5,8 +5,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
@@ -130,7 +128,7 @@
                               </Text>
                               <Button mnemonicParsing="false" onAction="#generateBalanceSheet" text="Balance Sheet" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="75.0" />
+                                    <Insets left="100.0" />
                                  </GridPane.margin>
                                  <padding>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -138,7 +136,7 @@
                               </Button>
                               <Button mnemonicParsing="false" onAction="#generateIncomeStatement" text="Income Statement" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="50.0" />
+                                    <Insets left="75.0" />
                                  </GridPane.margin>
                                  <padding>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -154,15 +152,32 @@
                                     <Insets left="25.0" />
                                  </GridPane.margin>
                               </Line>
-                              <Line endX="165.86447143554688" endY="-0.29032135009765625" startX="166.7967071533203" startY="117.33588409423828" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                              <Line endX="100.0" startX="100.99443054199219" startY="-117.15896606445312" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                              <Line endX="100.0" startX="99.99993896484375" startY="-115.6029052734375" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                              <Line endX="165.86447143554688" endY="-0.29032135009765625" startX="166.7967071533203" startY="117.33588409423828" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="45.0" />
+                                 </GridPane.margin></Line>
+                              <Line endX="100.0" startX="100.99443054199219" startY="-117.15896606445312" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin></Line>
+                              <Line endX="100.0" startX="99.99993896484375" startY="-115.6029052734375" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="50.0" />
+                                 </GridPane.margin></Line>
                               <DatePicker fx:id="datepicker" styleClass="label" stylesheets="@css/theme%20(green%20labels).css" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets left="30.0" right="25.0" />
                                  </GridPane.margin>
                               </DatePicker>
                               <TextField fx:id="companyName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Button fx:id="button" mnemonicParsing="false" onAction="#createCompany" text="Create Company" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="100.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </Button>
                            </children>
                         </GridPane>
                      </bottom>
@@ -295,34 +310,16 @@
                                  </GridPane.margin>
                               </TextField>
                               <Line endX="33.33871841430664" endY="-146.2513427734375" startX="33.33877944946289" startY="-419.54425048828125" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <MenuButton mnemonicParsing="false" prefHeight="25.0" prefWidth="239.0" styleClass="menuitem" stylesheets="@css/theme%20(green%20labels).css" text="Choose the financial element" GridPane.rowIndex="3">
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#makeAsset1Available" text="Asset" />
-                                    <MenuItem mnemonicParsing="false" onAction="#makeLiability1Available" text="Liability" />
-                                    <MenuItem mnemonicParsing="false" onAction="#makeIncome1Available" text="Income" />
-                                    <MenuItem mnemonicParsing="false" onAction="#makePatrimony1Available" text="Patrimony" />
-                                 </items>
+                              <ComboBox fx:id="acc1" onAction="#defineAccount1" prefHeight="25.0" prefWidth="239.0" promptText="Choose the account type" styleClass="menuitem" stylesheets="@css/theme%20(green%20labels).css" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="75.0" />
                                  </GridPane.margin>
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </MenuButton>
-                              <MenuButton mnemonicParsing="false" prefHeight="25.0" prefWidth="239.0" styleClass="menuitem" stylesheets="@css/theme%20(green%20labels).css" text="Choose the financial element" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#makeAsset2Available" text="Asset" />
-                                    <MenuItem mnemonicParsing="false" onAction="#makeLiability2Available" text="Liability" />
-                                    <MenuItem mnemonicParsing="false" onAction="#makeIncome2Available" text="Income" />
-                                    <MenuItem mnemonicParsing="false" onAction="#makePatrimony2Available" text="Patrimony" />
-                                 </items>
+                              </ComboBox>
+                              <ComboBox fx:id="acc2" onAction="#defineAccount2" prefHeight="25.0" prefWidth="239.0" promptText="Choose the account type" styleClass="menuitem" stylesheets="@css/theme%20(green%20labels).css" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="30.0" />
                                  </GridPane.margin>
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </MenuButton>
+                              </ComboBox>
                            </children>
                         </GridPane>
                      </center>
