@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Account;
 
+/**
+ * This class manages the necessary attributes and methods to create the registerbook as a Hash Table
+ * @author Lina Salinas Delgado
+ * @author Juancho Juan José Valencia Jaramillo
+ * @version V.01
+ *
+ */
 public class RegisterBook<Key, Value> implements HashInterface<Key,Value>{
 	
 	private AccountRegister<Key,Value>[] nodes;

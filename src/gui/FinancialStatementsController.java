@@ -29,6 +29,13 @@ import model.Patrimony;
 import datastructures.AccountRegister;
 import java.util.ArrayList;
 
+/**
+ * This class manages the necessary attributes and methods to make the graphical user interface works without any trouble for the user
+ * @author Lina Salinas Delgado
+ * @author Juancho Juan José Valencia Jaramillo
+ * @version V.01
+ *
+ */
 public class FinancialStatementsController {
 
     @FXML
@@ -101,6 +108,9 @@ public class FinancialStatementsController {
     
    
     @FXML
+    /**
+     * This method initialize the elements before the fxml file is launched
+     */
     private void initialize() {
     	
     	//initialize first column of the register book
@@ -123,7 +133,7 @@ public class FinancialStatementsController {
     	
     	assetacc1.setItems(FXCollections.observableArrayList(Asset.CURRENT,Asset.NONCURRENT));
     	liabilityacc1.setItems(FXCollections.observableArrayList(Liability.SHORTPERIOD,Liability.LONGPERIOD));
-    	incomeacc1.setItems(FXCollections.observableArrayList(Income.OPERATIVE,Income.NONOPERATIVE));
+    	incomeacc1.setItems(FXCollections.observableArrayList(Income.OPERATIVE,Income.NONOPERATIVE,Consume.SELLSCOST));
     	
     	assetacc1.setDisable(true);
     	liabilityacc1.setDisable(true);
@@ -134,7 +144,7 @@ public class FinancialStatementsController {
     	
     	assetacc2.setItems(FXCollections.observableArrayList(Asset.CURRENT,Asset.NONCURRENT));
     	liabilityacc2.setItems(FXCollections.observableArrayList(Liability.SHORTPERIOD,Liability.LONGPERIOD));
-    	incomeacc2.setItems(FXCollections.observableArrayList(Income.OPERATIVE,Income.NONOPERATIVE));
+    	incomeacc2.setItems(FXCollections.observableArrayList(Income.OPERATIVE,Income.NONOPERATIVE,Consume.SELLSCOST));
     	
     	assetacc2.setDisable(true);
     	liabilityacc2.setDisable(true);
@@ -144,6 +154,10 @@ public class FinancialStatementsController {
     }
     
     @FXML
+    /**
+     * This method creates the company with the required information to generate the required financial statements
+     * @param event the event triggered by the user
+     */
     private void createCompany(ActionEvent event) {
    
     	if(!companyName.getText().isEmpty()) {
@@ -178,6 +192,10 @@ public class FinancialStatementsController {
     }
        
     @FXML
+    /**
+     * This method allows to the user only choose 1 option depending of the account of their choice
+     * @param event the event triggered by the user.
+     */
     private void defineAccount1(ActionEvent event) {
     	if(acc1.getValue().equals("Asset")) {
     		assetacc1.setDisable(false);
@@ -200,6 +218,10 @@ public class FinancialStatementsController {
     }
     
     @FXML
+    /**
+     * This method allows to the user only choose 1 option depending of the account of their choice
+     * @param event the event triggered by the user.
+     */
     private void defineAccount2(ActionEvent event) {
     	if(acc2.getValue().equals("Asset")) {
     		assetacc2.setDisable(false);
@@ -222,6 +244,10 @@ public class FinancialStatementsController {
     }
     
     @FXML
+    /**
+     * this method allows to register an account
+     * @param event the event triggered by the user.
+     */
     private void registerAccount1(ActionEvent event) {
     	
     	try {
@@ -309,6 +335,10 @@ public class FinancialStatementsController {
     }
 
     @FXML
+    /**
+     * this method allows to register an account
+     * @param event the event triggered by the user.
+     */
     private void registerAccount2(ActionEvent event) {
     	
     	try {
@@ -395,6 +425,11 @@ public class FinancialStatementsController {
     }
       
     @FXML
+    /**
+     * This method allows to generate the balance sheet for a period of the company
+     * @param event the event triggered by the user
+     * @throws FileNotFoundException
+     */
     private void generateBalanceSheet(ActionEvent event) throws FileNotFoundException {
     	
        	String balanceSheet = companyName.getText() + "\nBalance Sheet " + datepicker.getValue().toString().substring(0, 7) + "\n" + "\n";
@@ -454,6 +489,11 @@ public class FinancialStatementsController {
     }
 
     @FXML
+    /**
+     * This method allows to generate the incomeStatement for a period of the company
+     * @param event the event triggered by the user
+     * @throws FileNotFoundException
+     */
     private void generateIncomeStatement(ActionEvent event) throws FileNotFoundException {
     	
     
@@ -503,6 +543,11 @@ public class FinancialStatementsController {
     }
     
     @FXML
+    /**
+     * this method allows to adds an account to the graphical table in the user interface
+     * @param account the account that is going to be added
+     * @param key the identifier of the account
+     */
     private void addToRegisterBook(Account account, String key) {
     	
     	if(exists(account)==false) { 
@@ -513,6 +558,11 @@ public class FinancialStatementsController {
     }	
     
     @FXML
+    /**
+     * This method allows to decide if given an account it already exists or not 
+     * @param account the account that is going to be checked
+     * @return a boolean value that indicates if either this account already exists or not
+     */
     private boolean exists(Account account) {
 	    
     	boolean exists = false;

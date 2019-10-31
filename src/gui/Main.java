@@ -7,6 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * This class manages the necessary attributes and methods to launch the graphical user interface for the user
+ * @author Lina Salinas Delgado
+ * @author Juancho Juan José Valencia Jaramillo
+ * @version V.01
+ *
+ */
 public class Main extends Application{
 	
 		@Override
