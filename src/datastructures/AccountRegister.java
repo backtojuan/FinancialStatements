@@ -10,10 +10,11 @@ public class AccountRegister<Key, Value> {
 		this.value = value;
 	}
 	
+	public Key getKey () {
+		return key;
+	}
 	
-	
-	
-	
-	
-	
+	public Value getValue() {
+		return value;
+	}
 }
