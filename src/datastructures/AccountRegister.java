@@ -34,4 +34,9 @@ public class AccountRegister<Key, Value> {
 	public void setNext(AccountRegister<Key,Value> n) {
 		next = n;
 	}
+	
+	@Override
+	public String toString() {
+		return "Key: " + key + "Value: " + value.toString();
+	}
 }

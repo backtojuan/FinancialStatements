@@ -11,8 +11,8 @@ public class Liability extends Account{
 	
 	private String temporaryValue;
 	
-	public final static String SHORTPERIOD = "Short Period";
-	public final static String LONGPERIOD = "Long Period";
+	public final static String CURRENT = "Current";
+	public final static String NONCURRENT = "Non-Current";
 	
 	/**
 	 * <b>Liability constructor</b>

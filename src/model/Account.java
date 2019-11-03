@@ -51,6 +51,6 @@ public abstract class Account {
 	 * This method overrides the toString method to returns the information for the account
 	 */
 	public String toString() {
-		return "Name: " + name + " Value: " + value;
+		return name + " $" + String.valueOf(value);
 	}
 }

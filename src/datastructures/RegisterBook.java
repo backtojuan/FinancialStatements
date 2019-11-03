@@ -19,13 +19,9 @@ public class RegisterBook<Key, Value> implements HashInterface<Key,Value>{
 	
 	private int numnodes;
 	
-	private String date;
-	
 	@SuppressWarnings("unchecked")
-	public RegisterBook(String date) {
-		
-		this.date = date;
-		
+	public RegisterBook() {
+
 		tablesize = 5;
 		
 		nodes = new AccountRegister[tablesize];
@@ -59,24 +55,20 @@ public class RegisterBook<Key, Value> implements HashInterface<Key,Value>{
 		
 		if(account==null) {
 			nodes[index] = new AccountRegister<>(key, value);
-			numnodes++;
 		}
 		else {
-			while(account.getNext()!=null) {
-				if(account.getKey().equals(key)) {
-					account.setNext(new AccountRegister<>(key,value));
-					numnodes++;
+			if(account.getNext()==null) {
+				account.setNext(new AccountRegister<>(key,value));
+			}
+			else {
+				while(account.getNext()!=null) {
+					account = account.getNext();
 				}
-				account = account.getNext();
+				account.setNext(new AccountRegister<>(key,value));
 			}
 		}		
 	}
 
-	@Override
-	public int size() {
-		return numnodes;
-	}
-	
 	public int getIndex(Key key) {
 		int index = 0;
 		

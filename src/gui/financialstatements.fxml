@@ -34,11 +34,6 @@
                   <Font name="Arial Bold" size="25.0" />
                </font>
             </Text>
-            <ImageView fitHeight="101.0" fitWidth="55.0" layoutX="861.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@imgs/money.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-3.0" layoutY="-36.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imgs/icesi.png" />
@@ -80,6 +75,11 @@
                   <Font name="Arial Bold" size="25.0" />
                </font>
             </Label>
+            <ImageView fitHeight="74.0" fitWidth="88.0" layoutX="942.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/money.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </top>
@@ -110,25 +110,25 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Text fx:id="company" strokeType="OUTSIDE" strokeWidth="0.0" text="Company" GridPane.rowIndex="1">
+                              <Text fx:id="company" strokeType="OUTSIDE" strokeWidth="0.0" text="Company" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="35.0" />
+                                    <Insets left="25.0" />
                                  </GridPane.margin>
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Text>
-                              <Text fx:id="period" strokeType="OUTSIDE" strokeWidth="0.0" text="Period" GridPane.rowIndex="2">
+                              <Text fx:id="period" strokeType="OUTSIDE" strokeWidth="0.0" text="Period" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="35.0" />
+                                    <Insets left="100.0" />
                                  </GridPane.margin>
                                  <font>
-                                    <Font size="17.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                               </Text>
                               <Button mnemonicParsing="false" onAction="#generateBalanceSheet" text="Balance Sheet" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="100.0" />
+                                    <Insets left="200.0" right="-225.0" />
                                  </GridPane.margin>
                                  <padding>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -136,7 +136,7 @@
                               </Button>
                               <Button mnemonicParsing="false" onAction="#generateIncomeStatement" text="Income Statement" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="75.0" />
+                                    <Insets left="175.0" right="-225.0" />
                                  </GridPane.margin>
                                  <padding>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -154,25 +154,28 @@
                               </Line>
                               <Line endX="165.86447143554688" endY="-0.29032135009765625" startX="166.7967071533203" startY="117.33588409423828" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="45.0" />
+                                    <Insets left="150.0" />
                                  </GridPane.margin></Line>
                               <Line endX="100.0" startX="100.99443054199219" startY="-117.15896606445312" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="30.0" />
+                                    <Insets left="125.0" />
                                  </GridPane.margin></Line>
                               <Line endX="100.0" startX="99.99993896484375" startY="-115.6029052734375" GridPane.columnIndex="5" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="50.0" />
+                                    <Insets left="125.0" />
                                  </GridPane.margin></Line>
-                              <DatePicker fx:id="datepicker" styleClass="label" stylesheets="@css/theme%20(green%20labels).css" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <DatePicker fx:id="datepicker" styleClass="label" stylesheets="@css/theme%20(green%20labels).css" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="30.0" right="25.0" />
+                                    <Insets left="-50.0" right="100.0" />
                                  </GridPane.margin>
                               </DatePicker>
-                              <TextField fx:id="companyName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button fx:id="button" mnemonicParsing="false" onAction="#createCompany" text="Create Company" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                              <TextField fx:id="companyName" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="100.0" />
+                                    <Insets left="-75.0" right="75.0" />
+                                 </GridPane.margin></TextField>
+                              <Button fx:id="button" mnemonicParsing="false" onAction="#createCompany" text="Create Company" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="175.0" right="-100.0" />
                                  </GridPane.margin>
                                  <padding>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -326,22 +329,22 @@
                      <top>
                         <Pane prefHeight="85.0" prefWidth="643.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Text fill="#3ee14f" layoutX="560.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ACCOUNT REGISTER">
+                              <Text fill="#3ee14f" layoutX="502.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ACCOUNT REGISTER">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Text>
-                              <ImageView fitHeight="54.0" fitWidth="65.0" layoutX="481.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@imgs/money.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="54.0" fitWidth="65.0" layoutX="812.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@imgs/money.png" />
-                                 </image>
-                              </ImageView>
                               <Line endX="205.0" layoutX="678.0" layoutY="70.0" startX="-208.0" />
+                              <ImageView fitHeight="74.0" fitWidth="88.0" layoutX="1095.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imgs/money.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="74.0" fitWidth="88.0" layoutX="277.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imgs/money.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </Pane>
                      </top>
@@ -357,7 +360,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Button fx:id="button2" mnemonicParsing="false" onAction="#registerAccount2" stylesheets="@css/theme%20(green%20labels).css" text="REGISTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Button fx:id="button2" mnemonicParsing="false" onAction="#registerAccount2" stylesheets="@css/theme%20(green%20labels).css" text="REGISTER / MODIFY" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="125.0" />
                                  </GridPane.margin>
@@ -365,7 +368,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
                               </Button>
-                              <Button fx:id="button1" mnemonicParsing="false" onAction="#registerAccount1" stylesheets="@css/theme%20(green%20labels).css" text="REGISTER" GridPane.rowIndex="1">
+                              <Button fx:id="button1" mnemonicParsing="false" onAction="#registerAccount1" stylesheets="@css/theme%20(green%20labels).css" text="REGISTER / MODIFY" GridPane.rowIndex="1">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
@@ -373,6 +376,22 @@
                                     <Insets left="150.0" />
                                  </GridPane.margin>
                               </Button>
+                              <ImageView fitHeight="74.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <image>
+                                    <Image url="@imgs/money.png" />
+                                 </image>
+                                 <GridPane.margin>
+                                    <Insets left="475.0" />
+                                 </GridPane.margin>
+                              </ImageView>
+                              <ImageView fitHeight="74.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                                 <image>
+                                    <Image url="@imgs/money.png" />
+                                 </image>
+                                 <GridPane.margin>
+                                    <Insets left="475.0" />
+                                 </GridPane.margin>
+                              </ImageView>
                            </children>
                         </GridPane>
                      </bottom>
