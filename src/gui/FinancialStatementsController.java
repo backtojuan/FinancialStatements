@@ -166,22 +166,19 @@ public class FinancialStatementsController {
     private void createCompany(ActionEvent event) {
    
     	if(!companyName.getText().isEmpty()) {
-    		if(datepicker.getValue()!=null) {
-    			String name = companyName.getText();
-    			String date = datepicker.getValue().toString();
-    			business = new Business(name);
+    		String name = companyName.getText();
+    		business = new Business(name);
     	
-    	    	Notifications.create()
-    	    	.title("Information")
-    	    	.text("Company created")
-    	    	.darkStyle()
-    			.hideAfter(Duration.seconds(3))
-        		.hideCloseButton()
-        		.position(Pos.CENTER)
-    	    	.graphic(new ImageView(new Image("gui/imgs/success.png")))
-    	    	.show()
-    	    	;
-   			}
+    	    Notifications.create()
+    	    .title("Information")
+    	    .text("Company created")
+    	    .darkStyle()
+    		.hideAfter(Duration.seconds(3))
+        	.hideCloseButton()
+        	.position(Pos.CENTER)
+    	    .graphic(new ImageView(new Image("gui/imgs/success.png")))
+    	    .show()
+    	    ;
    		}
     	
    		else if(companyName.getText().isEmpty() || datepicker.getValue()==null){
@@ -467,67 +464,9 @@ public class FinancialStatementsController {
     private void generateIncomeStatement(ActionEvent event) throws FileNotFoundException {
     	
     	try {
-	    	String incomeStatement = "---------------------------------------------------------\n "
-	    			+ companyName.getText() + "\nIncome Statement " + 
-	    	datepicker.getValue().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)).substring(5) + " \n" +
-	    	" \n-------------------------------------------------------\n";
 	    	
-	    	String operativeIncomes = " =========OPERATIVE INCOMES==========\n ";
-	    	String nonOperativeIncomes = " =========NON-OPERATIVE INCOMES==========\n ";
-	    	String operativeConsumes = " =========OPERATIVE CONSUMES==========\n ";
-	    	String nonOperativeConsumes = " =========NON-OPERATIVE CONSUMES==========\n ";
-	    	String sellsCostConsumes = " =========SELLS COST CONSUME==========\n ";
-	    	double totalIncomes = 0;
-	    	double totalConsumes = 0;
-	    	
-	    	ArrayList<AccountRegister<String,Account>> incomes = business.getRegisterBook().getValues("A");
-	    	
-	    	for (int i = 0; i < incomes.size(); i++) {
-	    		Income in = (Income) incomes.get(i).getValue();
-	    		if(in.getProfitValue().equals(Income.OPERATIVE)) {
-	    			operativeIncomes += " " + incomes.get(i).getValue().toString() + "\n "; 
-	    			totalIncomes += incomes.get(i).getValue().getValue();
-	    		}
-	    		else if(in.getProfitValue().equals(Income.NONOPERATIVE)) {
-	    			nonOperativeIncomes += " " + incomes.get(i).getValue().toString() + "\n "; 
-	    			totalIncomes += incomes.get(i).getValue().getValue();
-	    		}
-				if(i+1>=incomes.size()) {
-					incomeStatement += operativeIncomes;
-					incomeStatement += nonOperativeIncomes;
-					incomeStatement += " \nTotal Incomes " + "$" + totalIncomes + "\n " + "\n ";
-				}
-			}
-	    	
-	    	ArrayList<AccountRegister<String,Account>> consumes = business.getRegisterBook().getValues("B");
-	    	
-	    	for (int i = 0; i < consumes.size(); i++) {
-	    		Consume c = (Consume) consumes.get(i).getValue();
-	    		if(c.getDerivatedValue().equals(Consume.OPERATIVE)) {
-	    			operativeConsumes +=" " + consumes.get(i).getValue().toString() + "\n ";
-					totalConsumes += consumes.get(i).getValue().getValue();
-	    		} 				
-	    		else if(c.getDerivatedValue().equals(Consume.NONOPERATIVE)) {
-	    			nonOperativeConsumes +=" " + consumes.get(i).getValue().toString() + "\n ";
-					totalConsumes += consumes.get(i).getValue().getValue();
-	    		}
-	    		else if(c.getDerivatedValue().equals(Consume.SELLSCOST)) {
-	    			sellsCostConsumes += " " + consumes.get(i).getValue().toString() + "\n ";
-					totalConsumes += consumes.get(i).getValue().getValue();
-	    		}
-				if(i+1>=consumes.size()) {
-					incomeStatement += operativeConsumes;
-					incomeStatement += nonOperativeConsumes;
-					incomeStatement += sellsCostConsumes;
-					incomeStatement += " \nTotal Consumes " + "$" + totalConsumes + "\n " + "\n ";
-				}
-			}
-	    	
-	    	incomeStatement += "---------------------------------------------------------\n " 
-	    	+ "Total Utility: " + "$" + (totalIncomes - totalConsumes);
-	    	
-	    	business.setUtility(totalIncomes-totalConsumes);
-	    	
+    		String incomeStatement = business.generateIncomeStatement(datepicker.getValue());
+    		
 	    	Notifications.create()
 	    	.title("Information")
 	    	.text("Income Statement succesfully created")
@@ -565,84 +504,13 @@ public class FinancialStatementsController {
      * @param event the event triggered by the user
      * @throws FileNotFoundException
      */
-    private void generateBalanceSheet(ActionEvent event) throws FileNotFoundException {
+    private void generateBalanceSheet(ActionEvent event){
     	
     	try {
-    		File incomestatement = new File("data/incomestatement.txt");
     		
-    		if(!incomestatement.exists()) {
-    			throw new FileNotFoundException();
-    		}
-	       	String balanceSheet = "---------------------------------------------------------\n " + 
-    		companyName.getText() + " \nBalance Sheet " + 
-	       	datepicker.getValue().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + "\n " +
-	       	" \n-------------------------------------------------------\n ";
-	    	
-	       	String currentAssets = " =========CURRENT ASSETS==========\n ";
-	       	String noncurrentAssets = " =========NONCURRENT ASSETS==========\n ";
-	       	String currentLiabilities = " =========CURRENT LIABILITY==========\n ";
-	       	String noncurrentLiabilities = " =========CURRENT LIABILITY==========\n ";
-	       	
-	       	double totalAssets = 0;
-	    	double totalLiabilities = 0;
-	    	double totalPatrimony = 0;
-	    	
-	    	ArrayList<AccountRegister<String,Account>> assets = business.getRegisterBook().getValues("C");
-	    	
-	    	for (int i = 0; i < assets.size(); i++) {
-	    		Asset a = (Asset) assets.get(i).getValue();
-	    		if(a.getType().equals(Asset.CURRENT)) {
-	    			currentAssets += " " + assets.get(i).getValue().toString() + "\n ";
-	    			totalAssets += assets.get(i).getValue().getValue();
-	    		}
-	    		else if(a.getType().equals(Asset.NONCURRENT)) {
-	    			noncurrentAssets += " " + assets.get(i).getValue().toString() + "\n ";
-	    			totalAssets += assets.get(i).getValue().getValue();
-	    		}
-				if(i+1>=assets.size()) {
-					balanceSheet += currentAssets;
-					balanceSheet += noncurrentAssets;
-					balanceSheet += " \nTotal Assets " + "$" + totalAssets + "\n " + "\n ";
-				}
-			}
-	    	
-	    	ArrayList<AccountRegister<String,Account>> liabilities = business.getRegisterBook().getValues("G");
-	    	
-	    	for (int i = 0; i < liabilities.size(); i++) {
-	    		Liability l = (Liability) liabilities.get(i).getValue();
-	    		if(l.getTemporaryValue().equals(Liability.CURRENT)) {
-	    			currentLiabilities += " " + liabilities.get(i).getValue().toString() + "\n ";
-	    			totalLiabilities += liabilities.get(i).getValue().getValue();
-	    		}
-	    		else if(l.getTemporaryValue().equals(Liability.NONCURRENT)) {
-	    			noncurrentLiabilities += " " + liabilities.get(i).getValue().toString() + "\n ";
-	    			totalLiabilities += liabilities.get(i).getValue().getValue();
-	    		}
-				if(i+1>=liabilities.size()) {
-					balanceSheet += currentLiabilities;
-					balanceSheet += noncurrentLiabilities;
-					balanceSheet += " \nTotal Liabilities " + "$" + totalLiabilities + "\n " + " \n ";
-				}
-			}
-	    	
-	    	ArrayList<AccountRegister<String,Account>> patrimony = business.getRegisterBook().getValues("F");
-	    	
-	    	for (int i = 0; i < patrimony.size(); i++) {
-				balanceSheet += " " + patrimony.get(i).getValue().toString() + "\n ";
-				totalPatrimony += patrimony.get(i).getValue().getValue();
-				if(i+1>=patrimony.size()) {
-					balanceSheet += " " + "Name: Utility " + "Value: " + business.getUtility() + "\n";
-					totalPatrimony += business.getUtility();
-					balanceSheet += " \nTotal Patrimony " + "$" + totalPatrimony + "\n " + "\n ";
-				}
-			}
-	    	
-	    	balanceSheet += " -------------------------------------------------------\n" + " Total Assets: " + "$" 
-	    	+ (totalAssets) + "\n";
-	    	balanceSheet += " -------------------------------------------------------\n" + " Total Liabilities and Patrimony: " 
-	    	+ "$"+ (totalLiabilities+totalPatrimony) + "\n";
-	    	
-	    	Notifications.create()
+    		String balanceSheet = business.generateBalanceSheet(datepicker.getValue());
+    		
+    		Notifications.create()
 	    	.title("Information")
 	    	.text("Balance Sheet succesfully created")
 	    	.darkStyle()
